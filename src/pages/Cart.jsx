@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { decreamentQuantity, emptyCart, increamentQuantity, removeCartItem } from '../redux/slices/cartSlice'
 
 const Cart = () => {
+    const navigate = useNavigate()
     const [cartTotal, setCartTotal] = useState(0)
     const userCart = useSelector(state => state.cartReducer)
 
@@ -16,7 +17,11 @@ const Cart = () => {
 
     const dispatch = useDispatch()
 
-
+    const checkOut = () => {
+        dispatch(emptyCart())
+        alert("Items checked out successfully")
+        navigate('/')
+    }
 
     return (
         <>
@@ -72,7 +77,7 @@ const Cart = () => {
                                     <div className='border rounded shadow p-5'>
                                         <h2 className='text-2xl font-bold m-2'>Total Amount: <span className='text-red-600'> ${cartTotal} </span></h2>
                                         <hr />
-                                        <button className='bg-green-700 rounded text-white w-full p-2 mt-5'>Check Out</button>
+                                        <button onClick={checkOut} className='bg-green-700 rounded text-white w-full p-2 mt-5'>Check Out</button>
                                     </div>
 
                                 </div>

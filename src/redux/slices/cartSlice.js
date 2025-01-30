@@ -37,7 +37,6 @@ const cartSlice = createSlice({
             else{
                 return state.filter(item => item?.id != actionByCart.payload.id)
             }
-
         },
         emptyCart:() => []
     }
